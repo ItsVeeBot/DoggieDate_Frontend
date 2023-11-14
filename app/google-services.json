@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "565090777883",
+    "project_id": "doggie-date-2b96f",
+    "storage_bucket": "doggie-date-2b96f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:565090777883:android:cd226a9dfffc8f3f1871be",
+        "android_client_info": {
+          "package_name": "net.veebot.doggiedate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "565090777883-v328kdr7a99on7bspb6pcrpfa436p3g9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3l6ua16UXMkbg33i4mRZogRCOWkPEGrU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "565090777883-v328kdr7a99on7bspb6pcrpfa436p3g9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
