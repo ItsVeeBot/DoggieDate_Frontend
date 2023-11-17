@@ -27,4 +27,5 @@
     <string name="refresh">Refresh</string>
     <string name="placeholder_dog_name">Placeholder Dog Name</string>
     <string name="placeholder_dog_breed">Placeholder Dog Breed</string>
+    <string name="loading_list">Fetching Furry Friends…</string>
 </resources>

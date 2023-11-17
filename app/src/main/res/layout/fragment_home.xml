@@ -6,12 +6,32 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="top"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".HomeFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/listRecycler"
+        android:visibility="gone"
         />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:id="@+id/loadingLayout">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/loading_list"
+            android:textSize="30sp"
+            android:gravity="center"
+        />
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
 
 </LinearLayout>
