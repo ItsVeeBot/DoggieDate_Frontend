@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.DoggieDate" parent="android:Theme.Material.Light" />
-    <style name="Theme.DoggieDate.NAB" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.DoggieDate" parent="Theme.Material3.DynamicColors.Light">
+    </style>
+
+    <style name="Theme.DoggieDate.NAB" parent="Theme.Material3.Light.NoActionBar">
+
+    </style>
+
+    <style name="Theme.DoggieDate.NoActionBar" parent="Theme.Material3.DynamicColors.Light">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.DoggieDate.AppBarOverlay" parent="Theme.DoggieDate" />
+
+    <style name="Theme.DoggieDate.PopupOverlay" parent="ThemeOverlay.Material3.Light" />
 </resources>

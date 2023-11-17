@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".LoginActivity"
     android:padding="15dp"
-    >
+    tools:context=".LoginActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -23,14 +21,22 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:maxWidth="480dp"
         android:id="@+id/email"
         android:hint="@string/email_address"
+        android:autofillHints="emailAddress"
+        android:inputType="textEmailAddress"
         />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:maxWidth="480dp"
         android:id="@+id/password"
         android:hint="@string/password"
+        android:autofillHints="password"
+        android:inputType="textPassword"
         />
 
     <ProgressBar
@@ -43,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btn_login"
-        android:text="@string/login"
+        android:text="@string/btn_log_in"
         />
 
 

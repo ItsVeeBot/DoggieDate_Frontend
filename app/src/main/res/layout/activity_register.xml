@@ -17,20 +17,25 @@
         android:textStyle="bold"
         android:gravity="center"
         android:layout_marginBottom="20dp"
-        android:padding="15dp"
         />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="48dp"
         android:id="@+id/email"
         android:hint="@string/email_address"
+        android:autofillHints="emailAddress"
+        android:inputType="textEmailAddress"
         />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="48dp"
         android:id="@+id/password"
         android:hint="@string/password"
+        android:autofillHints="password"
+        android:inputType="textPassword"
         />
     
     <ProgressBar
@@ -43,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btn_register"
-        android:text="@string/register"
+        android:text="@string/btn_register"
         />
     
     <TextView
