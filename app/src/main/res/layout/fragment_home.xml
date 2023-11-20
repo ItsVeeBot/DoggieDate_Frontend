@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="top"
+    android:id="@+id/homeFragment"
     tools:context=".HomeFragment">
 
     <androidx.recyclerview.widget.RecyclerView

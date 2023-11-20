@@ -27,6 +27,7 @@ class DogListAdapter(private val dogList: List<ItemsViewModel>): RecyclerView.Ad
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val itemsViewModel = dogList[position]
+        // TODO: Replace this with the actual image from the object
         holder.imageView.setImageResource(itemsViewModel.image)
         holder.dogNameView.text = itemsViewModel.dogName
         holder.dogBreedView.text = itemsViewModel.dogBreed

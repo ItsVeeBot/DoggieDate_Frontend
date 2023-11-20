@@ -1,5 +1,7 @@
 package net.veebot.doggiedate
 
-data class ItemsViewModel(val image: Int, val dogName: String, val dogBreed: String){
+import com.google.firebase.firestore.DocumentSnapshot
+
+data class ItemsViewModel(val image: Int, val dogName: String, val dogBreed: String, val documentSnapshot: DocumentSnapshot){
 
 }

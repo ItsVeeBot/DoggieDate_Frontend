@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,10 +22,16 @@ private const val ARG_PARAM2 = "param2"
  * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(){
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private val dogDocument = FirebaseFirestore.getInstance().collection("publicdata/readwrite/dogs")
+    private val dogList = ArrayList<ItemsViewModel>()
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var loadTextView: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,31 +51,48 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val debugList = ArrayList<ItemsViewModel>()
-        debugList.add(ItemsViewModel(R.color.purple_500, "Buggy the Debug Dog", "Breed1, Breed2"))
-        debugList.add(ItemsViewModel(R.color.purple_700, "Test2", "Breed2"))
-        debugList.add(ItemsViewModel(R.color.purple_500, "Buggy the Debug Dog", "Breed1, Breed2"))
-        debugList.add(ItemsViewModel(R.color.purple_700, "Test2", "Breed2"))
-        debugList.add(ItemsViewModel(R.color.purple_500, "Buggy the Debug Dog", "Breed1, Breed2"))
-        debugList.add(ItemsViewModel(R.color.purple_700, "Test2", "Breed2"))
-        debugList.add(ItemsViewModel(R.color.purple_500, "Buggy the Debug Dog", "Breed1, Breed2"))
-        debugList.add(ItemsViewModel(R.color.purple_700, "Test2", "Breed2"))
-        debugList.add(ItemsViewModel(R.color.purple_500, "Buggy the Debug Dog", "Breed1, Breed2"))
-        debugList.add(ItemsViewModel(R.color.purple_700, "Test2", "Breed2"))
-        debugList.add(ItemsViewModel(R.color.purple_500, "Buggy the Debug Dog", "Breed1, Breed2"))
-        debugList.add(ItemsViewModel(R.color.purple_700, "Test2", "Breed2"))
-        debugList.add(ItemsViewModel(R.color.purple_500, "Buggy the Debug Dog", "Breed1, Breed2"))
-        debugList.add(ItemsViewModel(R.color.purple_700, "Test2", "Breed2"))
-        debugList.add(ItemsViewModel(R.color.purple_500, "Buggy the Debug Dog", "Breed1, Breed2"))
-        debugList.add(ItemsViewModel(R.color.purple_700, "Test2", "Breed2"))
-        debugList.add(ItemsViewModel(R.color.purple_500, "Buggy the Debug Dog", "Breed1, Breed2"))
-        debugList.add(ItemsViewModel(R.color.purple_700, "Test2", "Breed2"))
-        debugList.add(ItemsViewModel(R.color.purple_500, "Buggy the Debug Dog", "Breed1, Breed2"))
-        debugList.add(ItemsViewModel(R.color.purple_700, "Test2", "Breed2"))
-        val itemAdapter = DogListAdapter(debugList)
-        val recyclerView: RecyclerView = view.findViewById(R.id.listRecycler)
+        //val debugList = ArrayList<ItemsViewModel>()
+
+        val itemAdapter = DogListAdapter(dogList)
+        recyclerView = view.findViewById(R.id.listRecycler)
+        loadTextView = view.findViewById<LinearLayout>(R.id.loadingLayout)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = itemAdapter
+        refreshDogList()
+    }
+
+    fun refreshDogList(){
+        val beforeCount = dogList.size
+        dogDocument.get().addOnSuccessListener { documents ->
+            for (document in documents) {
+                var name = document.getString("name")
+                if (name != null && name != "") {
+                    var breeds = ""
+                    var breedsList = document.get("breeds") as List<String>?
+                    if(breedsList != null) {
+                        var addComma = false
+                        for (item in breedsList) {
+                            if (addComma) {
+                                breeds = breeds.plus(", ")
+                            }
+                            breeds = breeds.plus(item)
+                            addComma = true
+                        }
+                    }
+                    dogList.add(
+                        ItemsViewModel(
+                            R.color.purple_500,
+                            name,
+                            breeds,
+                            document
+                        )
+                    )
+                }
+            }
+            recyclerView.adapter?.notifyItemRangeInserted(beforeCount, dogList.size)
+            loadTextView.visibility = View.GONE
+            recyclerView.visibility = View.VISIBLE
+        }
     }
 
     companion object {
