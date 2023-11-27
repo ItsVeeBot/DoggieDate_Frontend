@@ -28,4 +28,17 @@
     <string name="placeholder_dog_name">Placeholder Dog Name</string>
     <string name="placeholder_dog_breed">Placeholder Dog Breed</string>
     <string name="loading_list">Fetching Furry Friends…</string>
+    <string name="title_activity_dog_view">DogViewActivity</string>
+    <string name="description_dog_image">Image of a dog</string>
+    <string name="placeholder_entry_description">Placeholder Entry Description</string>
+    <string name="placeholder_entry">Placeholder Entry</string>
+    <string name="detail_birthdate">Birthdate</string>
+    <string name="detail_breeds">Breeds</string>
+    <string name="detail_coat">Coat</string>
+    <string name="detail_sex">Sex</string>
+    <string name="detail_housetrained">Housetrained</string>
+    <string name="detail_interactions">Interactions</string>
+    <string name="detail_specialNeeds">Special Needs</string>
+    <string name="detail_weight">Weight (lbs)</string>
+    <string name="learn_more">Learn More!</string>
 </resources>

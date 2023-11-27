@@ -1,5 +1,6 @@
 package net.veebot.doggiedate
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,8 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,11 +56,16 @@ class HomeFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         //val debugList = ArrayList<ItemsViewModel>()
 
-        val itemAdapter = DogListAdapter(dogList)
+        val itemAdapter = DogListAdapter(requireContext(), dogList)
         recyclerView = view.findViewById(R.id.listRecycler)
         loadTextView = view.findViewById<LinearLayout>(R.id.loadingLayout)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = itemAdapter
+        itemAdapter.onItemClick = { item ->
+            val intent = Intent(context, DogViewActivity::class.java)
+            intent.putExtra("ITEM", item.documentId)
+            startActivity(intent)
+        }
         refreshDogList()
     }
 
@@ -65,10 +73,11 @@ class HomeFragment : Fragment(){
         val beforeCount = dogList.size
         dogDocument.get().addOnSuccessListener { documents ->
             for (document in documents) {
-                var name = document.getString("name")
+
+                val name = document.getString("name")
                 if (name != null && name != "") {
                     var breeds = ""
-                    var breedsList = document.get("breeds") as List<String>?
+                    val breedsList = document.get("breeds") as List<String>?
                     if(breedsList != null) {
                         var addComma = false
                         for (item in breedsList) {
@@ -79,12 +88,18 @@ class HomeFragment : Fragment(){
                             addComma = true
                         }
                     }
+                    val storage = Firebase.storage
+                    var image = storage.reference
+                    val imageRef = document.getString("image")
+                    if(imageRef!=null && imageRef != ""){
+                        image = storage.getReferenceFromUrl(imageRef)
+                    }
                     dogList.add(
                         ItemsViewModel(
-                            R.color.purple_500,
+                            image,
                             name,
                             breeds,
-                            document
+                            document.id
                         )
                     )
                 }

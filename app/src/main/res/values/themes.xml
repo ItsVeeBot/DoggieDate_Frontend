@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.DoggieDate" parent="Theme.Material3.DynamicColors.Light">
-    </style>
+    <style name="Theme.DoggieDate" parent="Theme.Material3.DynamicColors.Light"/>
 
     <style name="Theme.DoggieDate.NAB" parent="Theme.Material3.Light.NoActionBar">
 
